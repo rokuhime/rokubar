@@ -1,0 +1,5 @@
+target_monitor = 1
+bar_width = 50
+colour_bg = 55,55,55
+colour_text = 255,255,255
+colour_subtext = 155,155,155
