@@ -1,7 +1,6 @@
-// TODO
-
 const r = require('raylib');
 const fs = require('fs');
+const { RDImage } = require("./raindrops/image.js")
 
 class Config {
 	// returns config as an array of variables
@@ -12,7 +11,7 @@ class Config {
 			"colour_bg": "80,80,80",
 			"bar_width": 30,
 		}
-
+		let raindrops = {}
 					  
 		// cycle through file
 		let file = r.LoadFileText(filepath)
@@ -20,18 +19,28 @@ class Config {
 
 			// skip comments and blank lines
 			line = line.trim()
-			if(line.startsWith("//") || line.length == 0) break;
-
+			if(line.startsWith("//") || line.length == 0) continue;
+			
 			// split up name and value
 			const line_name = line.substring(0, line.indexOf("=")).trim()
-    		let line_value = line.substring(line.indexOf("=") + 1, line.length).trim()
+    		const line_value = line.substring(line.indexOf("=") + 1, line.length).trim()
 			
-			// format when needed, and assign setting to values
-			// if(line_name.includes("colour")) line_value = this.getColour(line_value)
 			
-			values[line_name] = line_value
+			// if its a raindrop, create and assign appropriately
+			let rd_count = 0
+			if(line_name == "RD"){
+				console.log(rd_count, "drops so far")
+				const rd_type = line_value.substring(0, line_value.indexOf(":")).trim()
+				const rd_values = line_value.substring(line_value.indexOf(":") + 1, line_value.length).trim().split(",")
+				raindrops[rd_count] = line_value
+				rd_count++ // this doesnt proc???
+				continue
+			}
 
+			// assign value finally
+			values[line_name] = line_value
 		}
+		values["raindrops"] = raindrops
 		console.log(values)
 		return values
   	}
