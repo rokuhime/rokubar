@@ -5,4 +5,3 @@ colour_text = 255,255,255
 colour_subtext = 155,155,155
 
 RD = image:test.png,0,0
-RD = image:test.png,100,0

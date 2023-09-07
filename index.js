@@ -27,14 +27,16 @@ r.SetTargetFPS(r.GetMonitorRefreshRate(target_monitor))
 // create gutter to make/contain raindrops
 let gutter = new Gutter()
 let gutter_data = gutter.createFromConfig(cfg)
+console.log(gutter_data)
 
 while (!r.WindowShouldClose()) {
     r.BeginDrawing();
     r.ClearBackground(Config.getColour(cfg["colour_bg"]))
 
     // go through all raindrops and update them
-    for(raindrop in gutter_data){
-        raindrop.update()
+    
+    for(let i = 0; i < Object.keys(gutter_data).length; i++){
+        gutter_data[i].update()
     }
 
     r.EndDrawing()

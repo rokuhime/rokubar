@@ -15,8 +15,8 @@ class Gutter {
             let rd_data = rd_container[i].substring(rd_container[i].indexOf(":") + 1, rd_container[i].length).split(",")
             let new_raindrop = createImage(rd_data, config)
             this.raindrops.push(new_raindrop)
-            return
         }
+        return this.raindrops
     }
 }
 
