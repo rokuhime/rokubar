@@ -1,3 +1,4 @@
+const r = require('raylib')
 const { Config } = require('./config.js') // circular dependency goes craaazy
 const { RDImage } = require("./raindrops/image.js")
 const { RDText } = require("./raindrops/text.js")
@@ -26,7 +27,7 @@ class Gutter {
                     break
             }
             
-            this.raindrops.push(new_raindrop)
+            this.raindrops[i] = new_raindrop
         }
         return this.raindrops
     }
@@ -47,18 +48,23 @@ function createText(data, config) {
     const text = data.substring(data.indexOf('"') + 1, data.lastIndexOf('"')).trim()
     // then we trim the text out,
     data = data.substring(text.length + 3, data.length)
-    // then we get the colour from brackets
-    const colour = data.substring(data.indexOf('(') + 1, data.indexOf(')'))
-
+    // then we get the colour from brackets, and get rid of the colour string
+    const colour = data.indexOf('(') != -1 ? data.substring(data.indexOf('(') + 1, data.indexOf(')')) : r.WHITE
+    data = data.replace("(" + colour + ")", "")
+    
     // split up data and do the rest normally
     data = data.split(",")
     const data_size = Object.keys(data).length
     const x = data[0] ? Number(data[0]) : 0
     const y = data[1] ? Number(data[1]) : 0
     const size = data[2] ? Number(data[2]) : Number(config["bar_width"])
+    const font = data[3] ? r.LoadFont(data[3]) : r.LoadFont("/usr/share/fonts/noto/NotoSans-Regular.ttf")
     
-    //create raindrop and return it
-    return new RDText(text, x, y, size, Config.getColour(colour))
+    // comma is still there so we use 5 (honestly not against this)
+    const spacing = data[5] ? Number(data[5]) : 0
+    
+    // create raindrop and return it
+    return new RDText(text, x, y, size, font, Config.getColour(colour), spacing)
 }
 
 module.exports.Gutter = Gutter
