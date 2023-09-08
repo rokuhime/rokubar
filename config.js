@@ -33,7 +33,6 @@ class Config {
 				const rd_type = line_value.substring(0, line_value.indexOf(":")).trim()
 				const rd_values = line_value.substring(line_value.indexOf(":") + 1, line_value.length).trim().split(",")
 				raindrops[rd_count] = line_value
-				rd_count++ // this doesnt proc???
 				continue
 			}
 

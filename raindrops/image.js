@@ -3,8 +3,8 @@ const r = require('raylib');
 class RDImage {
     constructor(filepath, x, y, sca, rot = 0) {
         this.sprite = r.LoadTexture(filepath);
-        this.posY = x;
-        this.posX = y;
+        this.posX = x;
+        this.posY = y;
         this.rotation = rot
         this.ratio = this.sprite.width / this.sprite.height
         this.scaleY = sca
