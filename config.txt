@@ -4,5 +4,6 @@ colour_bg = 55,55,55
 colour_text = 255,255,255
 colour_subtext = 155,155,155
 
-RD = image:test.png,0,0
-RD = text:"smello",0,0,50,(255,200,200)
+RD = image:test.png,0,0,50,0
+RD = text:"%TIME%",100,0,50,/usr/share/fonts/noto/NotoSans-Regular.ttf,(255,200,200)
+RD = text:"hello!?",400,0,50,/usr/share/fonts/noto/NotoSans-Regular.ttf,(200,200,255)

@@ -2,6 +2,7 @@ const r = require('raylib');
 
 class RDImage {
     constructor(filepath, x, y, sca, rot = 0) {
+        this.type = "RDImage" // instanced class being detected as an Object with no way to trace, workaround
         this.sprite = r.LoadTexture(filepath);
         this.posX = x;
         this.posY = y;
